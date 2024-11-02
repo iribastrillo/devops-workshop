@@ -3,6 +3,10 @@
 
 name: S3 deploy
 
+defaults:
+  run:
+    working-directory: ./frontend 
+
 on:
   push:
     branches:
@@ -25,11 +29,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          cache-dependency-path: client/package-lock.json
         
       - name: Update NPM
-        working-directory: ./frontend
         run: npm install -g npm@8  
 
       - name: Perform tests
-        working-directory: ./frontend
         run: npm test
