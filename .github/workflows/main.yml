@@ -28,6 +28,7 @@ jobs:
 
       - name: Update NPM
         run: npm install -g npm@8
+        working-directory: ./frontend
 
       - name: Perform tests
         run: npm test
