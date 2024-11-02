@@ -51,5 +51,6 @@ jobs:
       - name: To S3
         run: ./.github/workflows/scripts/deploy.sh
         shell: bash
+        working-directory: ../
         env:
           S3_ORIGIN_BUCKET: ${{ secrets.S3_ORIGIN_BUCKET }}
