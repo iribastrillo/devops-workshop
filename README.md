@@ -14,4 +14,6 @@ Para la solución del problema planteado se propuso la implementación de un e-c
 
 # Instalación
 
+## Frontend
+
 ...
