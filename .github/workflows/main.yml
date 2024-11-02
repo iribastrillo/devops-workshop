@@ -25,12 +25,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-          cache-dependency-path: ./frontend
         
       - name: Update NPM
-        run: npm install -g npm@8
         working-directory: ./frontend
+        run: npm install -g npm@8  
 
       - name: Perform tests
-        run: npm test
         working-directory: ./frontend
+        run: npm test
