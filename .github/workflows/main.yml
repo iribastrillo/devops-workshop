@@ -31,8 +31,8 @@ jobs:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
         
-      - name: Update NPM
-        run: npm install -g npm@8  
+      - name: Install nom packages
+        run: npm install
 
       - name: Perform tests
         run: npm test
