@@ -49,7 +49,7 @@ jobs:
           aws-region: ${{secrets.AWS_DEFAULT_REGION}}
 
       - name: To S3
-        run: ./.github/scripts/deploy.sh
+        run: ./.github/workflows/scripts/deploy.sh
         shell: bash
         env:
           S3_ORIGIN_BUCKET: ${{ secrets.S3_ORIGIN_BUCKET }}
