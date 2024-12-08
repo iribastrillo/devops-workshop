@@ -3,14 +3,10 @@
 
 name: S3 deploy
 
-defaults:
-  run:
-    working-directory: ./frontend 
-
 on:
   push:
     branches:
-      - main
+      - develop
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,8 +27,28 @@ jobs:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
         
-      - name: Install nom packages
+      - name: Install npm packages
         run: npm install
+        working-directory: ./frontend 
 
       - name: Perform tests
-        run: npm test
+        run: npm run test
+        working-directory: ./frontend 
+
+      - name: Build app
+        run: npm run build
+        working-directory: ./frontend 
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{secrets.AWS_DEFAULT_REGION}}
+
+      - name: To S3
+        run: ./.github/workflows/scripts/deploy.sh
+        shell: bash
+        env:
+          S3_ORIGIN_BUCKET: ${{ secrets.S3_ORIGIN_BUCKET }}
